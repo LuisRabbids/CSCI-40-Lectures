@@ -4,7 +4,7 @@ from django.urls import reverse
 
 # Create your models here.
 class TaskGroup(models.Model):
-    name = models.CharField(max_length=50)  
+    name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
@@ -14,25 +14,24 @@ class Task(models.Model):
     name = models.CharField(max_length=100)
     due_date = models.DateTimeField(null=False)
     taskgroup = models.ForeignKey(
-        TaskGroup, 
+        TaskGroup,
         on_delete=models.CASCADE,
         related_name='students',
-        null = True
+        null=True
     )
 
     def __str__(self):
-        return '{}: due on {} unit(s)'.format(self.name, self.due_date)
-    
+        return f"{self.name}: due on {self.due_date} unit(s)"
+
     def get_absolute_url(self):
         return reverse('task_detail', args=[str(self.name)])
-    
+
     @property
     def is_due(self):
         return datetime.now() >= self.due_date
-    
 
     class Meta:
-        ordering = ['due_date'] # order by due date ascending order
-        unique_together = ['due_date', 'name'] # Don't create a duplicate task
+        ordering = ['due_date']  # order by due date ascending order
+        unique_together = ['due_date', 'name']  # Don't create a duplicate task
         verbose_name = 'task'
         verbose_name_plural = 'tasks'
