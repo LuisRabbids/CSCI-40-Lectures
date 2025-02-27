@@ -25,3 +25,10 @@ class Task(models.Model):
     @property
     def is_due(self):
         return datetime.now() >= self.due_date
+    
+
+    class Meta:
+        ordering = ['due_date'] # order by due date ascending order
+        unique_together = ['due_date', 'name'] # Don't create a duplicate task
+        verbose_name = 'task'
+        verbose_name_plural = 'tasks'
