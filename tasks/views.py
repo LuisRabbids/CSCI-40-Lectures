@@ -7,9 +7,9 @@ def task_list(request):
     ctx = {
         'tasks': tasks
     }
-    return render(request, 'task_list.html', ctx)
+    return render(request, 'tasks/task_list.html', ctx)
 
 
 def task_detail(request, id):
-    ctx = {'task', Task.objects.get(id=id)}
-    return render(request, 'task_detail.html', ctx)
+    ctx = {'task': Task.objects.get(id=id)}
+    return render(request, 'tasks/task_detail.html', ctx)
