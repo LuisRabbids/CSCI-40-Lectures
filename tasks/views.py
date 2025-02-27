@@ -1,24 +1,15 @@
 from django.shortcuts import render
-
-# Create your views here.
+from .models import Task
 
 
 def task_list(request):
+    tasks = Task.objects.all()
     ctx = {
-        "tasks": [
-            "task 1",
-            "task 2",
-            "task 3",
-            "task 4"
-        ]
+        'tasks': tasks
     }
-    return render(request, "tasks/task_list.html", ctx)
+    return render(request, 'task_list.html', ctx)
 
 
-def add_task(request):
-    return render(request, "tasks/add_task.html")
-
-
-def completed_tasks(request):
-    ctx = {"completed_tasks": ["Submit report", "Attend meeting"]}
-    return render(request, "tasks/completed_tasks.html", ctx)
+def task_detail(request, id):
+    ctx = {'task', Task.objects.get(id=id)}
+    return render(request, 'task_detail.html', ctx)
