@@ -13,7 +13,8 @@ class Task(models.Model):
     taskgroup = models.ForeignKey(
         TaskGroup, 
         on_delete=models.CASCADE,
-        related_name='students'
+        related_name='students',
+        null = True
     )
 
     def __str__(self):
