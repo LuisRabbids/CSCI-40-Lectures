@@ -3,6 +3,7 @@ from django.shortcuts import render
 from .models import Task
 
 
+@login_required
 def task_list(request):
     tasks = Task.objects.all()
     ctx = {
@@ -11,12 +12,7 @@ def task_list(request):
     return render(request, 'tasks/task_list.html', ctx)
 
 
+@login_required
 def task_detail(request, id):
     ctx = {'task': Task.objects.get(id=id)}
     return render(request, 'tasks/task_detail.html', ctx)
-
-
-@login_required
-def view_function(request):
-    # things go here
-    pass
