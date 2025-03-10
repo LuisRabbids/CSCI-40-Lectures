@@ -1,8 +1,18 @@
 from django.contrib import admin
-from .models import Task, TaskGroup
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.models import User
+from .models import Task, TaskGroup, Profile
 
 
-# Register your models here.
+class ProfileInline(admin.StackedInline):
+    model = Profile
+    can_delete = False
+
+
+class UserAdmin(admin.BaseUserAdmin):
+    inlines = [ProfileInline,]
+
+
 class TaskInline(admin.TabularInline):
     model = Task
 
@@ -39,6 +49,7 @@ class TaskAdmin(admin.ModelAdmin):
 
 # registering the model and the admin is what tells
 # Django that admin pages must be generated for the models specified
-#meow
 admin.site.register(TaskGroup, TaskGroupAdmin)
 admin.site.register(Task, TaskAdmin)
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)
