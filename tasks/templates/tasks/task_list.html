@@ -6,7 +6,7 @@
 <body>
     <h1>Task List</h1>
 
-    <form action="/" method="post">
+    <form action="{% url 'tasks:task-list' %}" method="post">
         {% csrf_token %}
         <label for="task_name">
             <span>Task Name</span>
