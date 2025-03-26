@@ -16,3 +16,4 @@ def task_list(request):
 def task_detail(request, id):
     ctx = {'task': Task.objects.get(id=id)}
     return render(request, 'tasks/task_detail.html', ctx)
+#luis
