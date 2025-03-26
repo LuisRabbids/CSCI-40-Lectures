@@ -14,9 +14,9 @@ def task_list(request):
         t.due_date = request.POST.get('task_due')
         t.taskgroup = TaskGroup.objects.get(pk=request.POST.get('taskgroup'))
         t.save()
-        return render(request, 'task_list.html', ctx)
+        return render(request, 'tasks/task_list.html', ctx)
     else:
-        return render(request, 'task_list.html', ctx)
+        return render(request, 'tasks/task_list.html', ctx)
 
 
 @login_required
