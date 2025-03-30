@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import TaskForm
 from .models import Task, TaskGroup
@@ -14,7 +15,7 @@ def task_list(request):
         form = TaskForm(request.POST)
         if form.is_valid():
             task = form.save()
-            return redirect('task_detail', pk=task.pk)
+            return redirect('tasks:task-detail', id=task.id)
 
     ctx = {"tasks": tasks, "taskgroups": taskgroups, "form": form}
     return render(request, 'tasks/task_list.html', ctx)
