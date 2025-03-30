@@ -10,16 +10,18 @@ def task_list(request):
     tasks = Task.objects.all()
     taskgroups = TaskGroup.objects.all()
     form = TaskForm()
+
+    if request.method == "POST":
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            t = Task()
+            t.name = form.cleaned_data.get('name')
+            t.due_date = form.cleaned_data.get('due_date')
+            t.taskgroup = form.cleaned_data.get('taskgroup')
+            t.save()
+
     ctx = {"tasks": tasks, "taskgroups": taskgroups, "form": form}
-    if (request.method == "POST"):
-        t = Task()
-        t.name = request.POST.get('task_name')
-        t.due_date = request.POST.get('task_due')
-        t.taskgroup = TaskGroup.objects.get(pk=request.POST.get('taskgroup'))
-        t.save()
-        return render(request, 'tasks/task_list.html', ctx)
-    else:
-        return render(request, 'tasks/task_list.html', ctx)
+    return render(request, 'tasks/task_list.html', ctx)
 
 
 @login_required
