@@ -1,5 +1,7 @@
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.shortcuts import render
+from .forms import TaskForm
 from .models import Task, TaskGroup
 
 
@@ -7,7 +9,8 @@ from .models import Task, TaskGroup
 def task_list(request):
     tasks = Task.objects.all()
     taskgroups = TaskGroup.objects.all()
-    ctx = {"tasks": tasks, "taskgroups": taskgroups}
+    form = TaskForm()
+    ctx = {"tasks": tasks, "taskgroups": taskgroups, "form": form}
     if (request.method == "POST"):
         t = Task()
         t.name = request.POST.get('task_name')
