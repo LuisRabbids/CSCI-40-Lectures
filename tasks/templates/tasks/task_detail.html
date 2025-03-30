@@ -1,12 +1,15 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-    <title>Task Detail</title>
-    <link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css">
-</head>
-<body>
-    {{ task.name }}
-    {{ task.due_date }}
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block page_title %}{{ task.name }}{% endblock %}
+
+{% block style %}
+<style> 
+    /* Page-specific styles */
+</style>
+{% endblock %}
+
+{% block main %}
+    <h1>{{ task.name }}</h1>
+    <p>Due Date: {{ task.due_date }}</p>
+{% endblock %}
