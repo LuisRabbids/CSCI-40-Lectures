@@ -17,7 +17,7 @@ def task_list(request):
             return redirect('task_detail', pk=task.pk)
 
     ctx = {"tasks": tasks, "taskgroups": taskgroups, "form": form}
-    return render(request, 'task_list.html', ctx)
+    return render(request, 'tasks/task_list.html', ctx)
 
 
 @login_required
