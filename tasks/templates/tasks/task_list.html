@@ -6,13 +6,11 @@
 <body>
     <h1>Task List</h1>
 
-    {% block content %}
-        <form method="post">
-            {% csrf_token %}
-            {{ form }}
-            <input type="submit" value="Submit">
-        </form>
-    {% endblock %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
 
     <ul>
         {% for task in tasks %}

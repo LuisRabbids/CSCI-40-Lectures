@@ -12,7 +12,7 @@ def task_list(request):
     form = TaskForm()
 
     if request.method == 'POST':
-        form = TaskForm(request.POST)
+        form = TaskForm(request.POST, request.FILES)
         if form.is_valid():
             task = form.save()
             return redirect('tasks:task-detail', id=task.id)
