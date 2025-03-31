@@ -25,6 +25,7 @@ class Task(models.Model):
         related_name='students',
         null=True
     )
+    task_image = models.ImageField(upload_to='images/', null=True)
 
     def __str__(self):
         return f"{self.name}: due on {self.due_date}"
