@@ -12,7 +12,14 @@
 {% block main %}
     <h1>{{ task.name }}</h1>
     <p>Due Date: {{ task.due_date }}</p>
+
     {% if task.task_image %}
         <img src="{{ task.task_image.url }}" alt="Task Image">
     {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
 {% endblock %}
